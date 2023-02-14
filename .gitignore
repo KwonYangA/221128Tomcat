@@ -47,6 +47,9 @@ local.properties
 # STS (Spring Tool Suite)
 .springBeans
 
+# video 제외
+.video/
+
 # Code Recommenders
 .recommenders/
 
