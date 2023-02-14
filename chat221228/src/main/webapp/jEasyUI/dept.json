@@ -1,0 +1,5 @@
+[
+  {"deptno":10, "dname":"개발부", "loc":"부산"},
+  {"deptno":20, "dname":"인사부", "loc":"서울"},  
+  {"deptno":30, "dname":"총무부", "loc":"인천"}  
+]
