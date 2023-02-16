@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 //form전송시 클라이언트측의 요청을 서블릿이 듣는다.
 //method="get"이면 doGet호출
@@ -27,6 +29,10 @@ public class HelloServlet extends HttpServlet {
  	{
 	 System.out.println("doGet호출");
 	 logger.info("doGet호출 성공");
+	 res.setContentType("text/html;charset=utf-8");
+	 PrintWriter out = res.getWriter();
+	 String msg = "안녕하세요";
+	 out.print("<font size=28px color=red>"+msg+"</font>");
  	}
  @Override
  public void doPost(HttpServletRequest req, HttpServletResponse res)
