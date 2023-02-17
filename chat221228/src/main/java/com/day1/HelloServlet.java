@@ -32,7 +32,20 @@ public class HelloServlet extends HttpServlet {
 	 res.setContentType("text/html;charset=utf-8");
 	 PrintWriter out = res.getWriter();
 	 String msg = "안녕하세요";
+	 //브라우저에서 요청[Get방식]시 응답으로 나가는 문자열
+	 //문자열(1.텍스트파일:숫자의 경우 문자로 변환 후 쓴다, 2. 바이너리파일:데이터를 있는 그대로 읽고 쓴다)
+	 //text메인타입 html서브타입 - 브라우저 번역 - 태그는 없고 내용만 출력
 	 out.print("<font size=28px color=red>"+msg+"</font>");
+//	 BookDao bDao = new BookDao();
+//	 logger.info(bDao.testDate());
+	 
+	 //단위테스트가 불가하다 - Postman사용하면 가능하다
+	 
+	 
+	 //get 방식
+	 //서버측의 리소스(html, css, js,,)를 가져오기 위해서..
+	 //쿼리스트링 전송(소용량)
+	 //노출
  	}
  @Override
  public void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -41,3 +54,4 @@ public class HelloServlet extends HttpServlet {
 	 logger.info("doPost호출 성공");
 	}
 }
+

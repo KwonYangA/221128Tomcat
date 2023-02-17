@@ -26,6 +26,14 @@ public class MimeHtmlServlet2 extends HttpServlet {
 	 	throws ServletException, IOException
 	 	{
 			logger.info("doGet호출");
+			//요청 객체로 세션객체를 생성함 - 요청객체가 있어야만 세션사용이 가능함
+			//시간을 연장할 수 있다.
+			//서블릿에서는 객체의 유지 정도가 다르다?? 다를 수 있다?? 진짜??
+			//scope가 지원됨
+			//page scope - 그 페이지 안에서만 기억해준다
+			//request scope - 요청이 유지되는 동안에만 유지 - URL주소가 그대로 이면 유지 바뀌면 잃어버림
+			//session scope - URL주소가 바뀌어도 유지됨 - 톰캣은 기본 30분 셋팅되어 있음
+			//application scope - 사용하면 서버가 다운됨
 			HttpSession session = req.getSession();
 			String myName = new String("이순신");
 			int age = 30;
