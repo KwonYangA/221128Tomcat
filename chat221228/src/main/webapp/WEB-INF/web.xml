@@ -34,6 +34,17 @@
      <url-pattern>/test/test.do</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+     <servlet-name>FrontController1</servlet-name>
+	 <servlet-class>com.pojo.step1.FrontMVC1</servlet-class>    
+    </servlet>
+    <servlet-mapping>
+     <servlet-name>FrontController1</servlet-name>
+     <url-pattern>*.st1</url-pattern>
+    </servlet-mapping>
+    <!-- *.st1 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이 인터셉트 함 
+    			web.xml을 수정하면 무조건 서버를 재기동해야 수정된 내용이 반영됨			
+    -->
      <servlet>
      <servlet-name>MemberServlet</servlet-name>
 	 <servlet-class>com.mvc.controller.MemberController</servlet-class>    
