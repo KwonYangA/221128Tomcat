@@ -2,7 +2,7 @@ import React from 'react'
 import Bottom from '../include/Bottom'
 import Header from '../include/Header'
 
-const DeptPage = () => {
+const EmpPage = () => {
   return (
     <>
       <Header/>
@@ -11,4 +11,4 @@ const DeptPage = () => {
     </>
   )
 }
-export default DeptPage
+export default EmpPage

@@ -66,7 +66,7 @@ public class DeptLogic {
 
 	public int deptDelete() {
 		logger.info("deptDelete호출");
-		return 0;
+		return 0; //
 	}
 
 }

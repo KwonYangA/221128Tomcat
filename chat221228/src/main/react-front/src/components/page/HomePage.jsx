@@ -1,10 +1,16 @@
 import React from 'react'
+import Header from '../include/Header'
+import Bottom from '../include/Bottom'
 
 const HomePage = () => {
   return (
-    <div>
-     HomePage페이지
-    </div>
+    <React.Fragment>
+      <Header />  
+      <div>
+        HomePage
+      </div>
+      <Bottom />
+    </React.Fragment>
   )
 }
 
