@@ -54,8 +54,30 @@
      <url-pattern>/member/member.do</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+     <servlet-name>FrontController1</servlet-name>
+	 <servlet-class>com.pojo.step2.ActionServlet</servlet-class>    
+    </servlet>
+    <servlet-mapping>
+     <servlet-name>FrontController1</servlet-name>
+     <url-pattern>*.st2</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+     <servlet-name>FrontController3</servlet-name>
+	 <servlet-class>com.pojo.step3.ActionSupport</servlet-class>    
+    </servlet>
+    <servlet-mapping>
+     <servlet-name>FrontController3</servlet-name>
+     <url-pattern>*.st3</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
 <!-- 
+	context-param과 init-param차이
+	context-param은 서버가 기동될 때 한 번 읽으면 서버가 종료될 때까지 계속 기억함
+	init-param은 서블릿이 요청될 때 마다 새로 읽는다.
+
 	Deployeement Descriptor
 	배치서술자
 	spring maven-빌드 -> pom.xml파일 등록
