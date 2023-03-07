@@ -9,13 +9,25 @@ public class Board3Logic {
 	Logger logger = Logger.getLogger(Board3Logic.class);
 	Board3Dao boardDao = new Board3Dao(); //제어역전XX, 내가 제어
 	public List<Map<String, Object>> boardList(Map<String, Object> pMap) {
-		logger.info("boardList호출 :"+pMap);
+		logger.info("boardList호출  :"+pMap);
 		List<Map<String, Object>> bList = null;
 		bList =boardDao.boardList(pMap);
 		return bList;
 	}
+	public int boardUpdate(Map<String, Object> pMap) {
+		logger.info("boardUpdate 호출  :"+ pMap);
+		int result =0;		
+		result= boardDao.boardMUpdate(pMap);
+		return result;
+	}
+	public int boardDelete(Map<String, Object> pMap) {
+		logger.info("boardDelete  :"+ pMap);
+		int result =0;		
+		result= boardDao.boardDelete(pMap);
+		return result;
+	}
 	public int boardInsert(Map<String, Object> pMap) {
-		logger.info("boardInsert호출:"+ pMap);
+		logger.info("boardInsert호출 :"+ pMap);
 		int result = 0;
 		int bm_no = 0;
 		int bm_group = 0;
@@ -27,14 +39,21 @@ public class Board3Logic {
 		}
 		//댓글쓰기?
 		if(bm_group > 0) {
-			boardDao.bStepUpdate(pMap);
+			/***  
+			UPDATE
+	        board_master_t
+	        SET bm_step = bm_step + 1
+	        WHERE bm_group =:g
+	        AND bm_step >:s
+			 */
+			boardDao.bStepUpdate(pMap);//bm_group=8, bm_step>1
 			pMap.put("bm_pos", Integer.parseInt(pMap.get("bm_pos").toString())+1);
 			pMap.put("bm_step", Integer.parseInt(pMap.get("bm_step").toString())+1);
 		}
 		//새글쓰기? - 그룹번호 채번 포함
 		else {
 			bm_group = boardDao.getBGroup();
-			logger.info("새글쓰기 로직 호출=>" +bm_group);
+			logger.info("새글쓰기 로직 호출 =>" +bm_group);
 			pMap.put("bm_group", bm_group);
 			pMap.put("bm_pos", 0);
 			pMap.put("bm_step", 0);
@@ -42,5 +61,6 @@ public class Board3Logic {
 		result = boardDao.boardInsert(pMap);
 		return result;
 	}
+
 
 }

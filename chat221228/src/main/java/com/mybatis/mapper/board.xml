@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.BoardMapper">
+<delete id="boardMDelete" parameterType="int">
+			DELETE FROM board_master_t
+			WHERE bm_no = #{value}
+</delete>
 	<select id="boardList" parameterType="java.util.HashMap"
 		resultType="map">
 		SELECT
-		bm.bm_no, bm.bm_title, bm.bm_writer, bs.bs_file
-		, bm.bm_hit, bm.bm_group, bm.bm_pos, bm.bm_step
-		, bm.bm_reg, bm.bm_pw
-		FROM board_master_t bm, board_sub_t bs
-		WHERE bm.bm_no = bs.bm_no(+)
+        BM.BM_NO, BM.BM_TITLE, BM.BM_WRITER, BM_CONTENT, BS.BS_FILE
+        , BM.BM_HIT, BM.BM_GROUP, BM.BM_POS, BM.BM_STEP, BM.BM_REG,
+        BM.BM_PW
+        FROM
+        BOARD_MASTER_T BM,
+       	BOARD_SUB_T BS
+        WHERE BM.BM_NO = BS.BM_NO(+)
 		<if test='bm_no  > 0'>
 			AND bm.bm_no = #{bm_no}
 		</if>
@@ -41,12 +47,26 @@
 		board_sub_t(bm_no, bs_seq, bs_file, bs_size)
 		VALUES(#{bm_no}, 1, #{bs_file}, #{bs_size})
 	</insert>
-	<update id="bmStepUpdate" parameterType="map">
-		UPDATE
-		board_master_t
+	<update id="bStepUpdate" parameterType="map">
+		UPDATE board_master_t
 		SET bm_step = bm_step + 1
 		WHERE bm_group = #{bm_group}
 		AND bm_step > #{bm_step}
+	</update>
+	<update id="boardMUpdate" parameterType="map">
+		UPDATE board_master_t
+		SET BM_TITLE = #{bm_title}
+			<if test="bm_writer !=null">
+			 	,BM_WRITER = #{bm_writer}
+			</if>
+			<if test = "bm_content !=null">
+				,bm_content = #{bm_content}
+			</if>
+			<if test = "bm_pw !=null">
+				,bm_pw = #{bm_pw}
+			</if>
+				,bm_reg = TO_CHAR(sysdate, 'YYYY-MM-DD')			
+				WHERE bm_no = #{bm_no}
 	</update>
 	<select id="getBGroup" parameterType="string" resultType="int">
 		SELECT

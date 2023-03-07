@@ -42,7 +42,6 @@ public class Board3Controller implements Controller3 {
 		req.setAttribute("bList", bList);
 		return "forward:jsonBoardList.jsp";
 	}
-
 	@Override
 	public Object boardDetail(HttpServletRequest req, HttpServletResponse res) {
 		logger.info("boardDetail호출");
@@ -81,27 +80,50 @@ public class Board3Controller implements Controller3 {
 		}		
 		return path;
 	}
-
+	
 	@Override
 	public Object boardUpdate(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		logger.info("boardUpdate호출");
-		int result = 1;
+		int result = 0;
+		//폼태그 안에 사용자가 입력한 정보(bm_writer, bm_title, bm_content, ....)
+		//req.getParameter("bm_writer");
+		//req.getParameter("bm_title");
+		//req.getParameter("bm_content");
+		//req.getParameter("?");
+		//req.getParameter("?");
+		//req.getParameter("?");
+		Map<String, Object> pMap = new HashMap<>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bind(pMap);
+		logger.info(pMap);
+		//result(0->1) 값의 변화를 주는 코드 추가
+		result = boardLogic.boardUpdate(pMap);
+		String path = "";
 		if (result == 1) {
-			res.sendRedirect("boardInsertSuccess.jsp");
-			return null;
-		}
-		return "redirect:/board3/boardList.st3";
+			path = "redirect:/board3/boardList.st3";
+		}else {
+			path = "boardInsertFail.jsp";
+			res.sendRedirect(path);
+		}		
+		return path;
 	}
 
 	@Override
 	public Object boardDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		logger.info("boardDelete호출");
 		int result = 0;
+		logger.info("boardDelete호출");
+		Map<String, Object> pMap = new HashMap<>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bind(pMap);
+		result = boardLogic.boardDelete(pMap);
+		String path = "";
 		if (result == 1) {
-			res.sendRedirect("boardInsertSuccess.jsp");
-			return null;
-		}
-		return "redirect:/board3/boardList.st3";
+			path = "redirect:/board3/boardList.st3";
+		}else {//result=0인경우 else타게 되므로 split()
+			path = "redirect:/board3/boardInsertFail.jsp";
+			res.sendRedirect(path);
+		}		
+		return path;
 	}
 
 }

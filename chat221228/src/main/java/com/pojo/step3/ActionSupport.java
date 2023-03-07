@@ -52,26 +52,16 @@ public class ActionSupport extends HttpServlet {
 			} else if (obj instanceof ModelAndView) {
 				mav = (ModelAndView) obj;
 				pageMove = new String[2];
-				pageMove[0] = "forward";
+				pageMove[0] = ""; //forward-> ViewResolver else if()타게 됨->webapp				
 				pageMove[1] = mav.getViewName();
 			}
 			if (pageMove != null) {
-				// pageMove[0] = redirect or forward
-				// pageMove[1] = XXX.jsp
-				String path = pageMove[1];
-				if ("redirect".equals(pageMove[0])) {
-					res.sendRedirect(path);
-				} else if ("forward".equals(pageMove[0])) {
-					RequestDispatcher view = req.getRequestDispatcher("/" + path + ".jsp");
-					view.forward(req, res);
-				} else {
-					path = pageMove[0] + "/" + pageMove[1];
-					RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/view/" + path + ".jsp");
-					view.forward(req, res);
+				new ViewResolver(req, res, pageMove);
 				}
+				//WEB-INF/
 			}
 		}
-	}
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
