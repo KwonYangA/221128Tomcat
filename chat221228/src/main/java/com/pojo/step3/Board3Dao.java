@@ -120,6 +120,28 @@ public class Board3Dao {
 		}
 		return result;
 	}
+	/**
+	 * 글조회수 수정하기 구현
+	 * @param int - 글 번호 가져오기
+	 */
+	public int hitCount(int bm_no) {
+		int result = 0;
+		logger.info("boardMUpdate 호출");
+		SqlSessionFactory sqlSessionFactory = null;
+		SqlSession sqlSession = null;
+		try {
+			sqlSessionFactory = mcf.getSqlSessionFactory();
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.update("hitCount", bm_no);
+			if(result ==1) {
+				sqlSession.commit();	
+				}
+				logger.info(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	public int boardDelete(Map<String, Object> pMap) {
 		int result = 0;
 		logger.info("boardMDelete 호출");
@@ -137,6 +159,25 @@ public class Board3Dao {
 				sqlSession.commit();	
 				}
 				logger.info(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int boardSInsert(Map<String, Object> pMap) {
+		logger.info("boardSInsert 호출");
+		int result = 0;
+		SqlSessionFactory sqlSessionFactory = null;
+		SqlSession sqlSession = null;
+		try {
+			sqlSessionFactory = mcf.getSqlSessionFactory();
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.update("boardSInsert", pMap);
+			if(result ==1) {
+			sqlSession.commit();	
+			}
+			logger.info(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

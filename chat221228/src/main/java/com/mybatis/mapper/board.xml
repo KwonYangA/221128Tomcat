@@ -8,13 +8,13 @@
 	<select id="boardList" parameterType="java.util.HashMap"
 		resultType="map">
 		SELECT
-        BM.BM_NO, BM.BM_TITLE, BM.BM_WRITER, BM_CONTENT, BS.BS_FILE
-        , BM.BM_HIT, BM.BM_GROUP, BM.BM_POS, BM.BM_STEP, BM.BM_REG,
+        BM.BM_NO, BM.BM_TITLE, BM.BM_WRITER, NVL(BS.BS_FILE, ' ') BS_FILE, BM_CONTENT, 
+        BM.BM_HIT, BM.BM_GROUP, BM.BM_POS, BM.BM_STEP, BM.BM_REG,
         BM.BM_PW
         FROM
         BOARD_MASTER_T BM,
-       	BOARD_SUB_T BS
-        WHERE BM.BM_NO = BS.BM_NO(+)
+           BOARD_SUB_T BS
+        WHERE BM.BM_NO = BS.BM_NO(+)     
 		<if test='bm_no  > 0'>
 			AND bm.bm_no = #{bm_no}
 		</if>
@@ -52,6 +52,11 @@
 		SET bm_step = bm_step + 1
 		WHERE bm_group = #{bm_group}
 		AND bm_step > #{bm_step}
+	</update>
+		<update id="hitCount" parameterType="int">
+		UPDATE board_master_t
+		SET bm_hit = bm_hit + 1
+		WHERE bm_no = #{value}
 	</update>
 	<update id="boardMUpdate" parameterType="map">
 		UPDATE board_master_t

@@ -50,9 +50,7 @@ public class Board3Controller implements Controller3 {
 		Map<String, Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
-
-		List<Map<String, Object>> bList = boardLogic.boardList(pMap);
-
+		List<Map<String, Object>> bList = boardLogic.boardDetail(pMap);
 		logger.info(bList);
 		req.setAttribute("bList", bList);
 
@@ -71,8 +69,9 @@ public class Board3Controller implements Controller3 {
 		logger.info("boardInsert호출");
 		int result = 0;
 		Map<String, Object> pMap = new HashMap<>();
+		logger.info("after ==>" + pMap);
 		HashMapBinder hmb = new HashMapBinder(req);
-		hmb.bind(pMap);
+		hmb.multiBind(pMap);
 		result = boardLogic.boardInsert(pMap);
 		String path = "";
 		if (result == 1) {

@@ -21,7 +21,6 @@ if (getBoardList != null && getBoardList.size() > 0) {
 	bm_pos = getBoardList.get(0).get("BM_POS").toString();
 	bm_step = getBoardList.get(0).get("BM_STEP").toString();
 }
-out.print(getBoardList);
 %>
 <!DOCTYPE html>
 <html>
@@ -183,7 +182,7 @@ out.print(getBoardList);
 				</tr>
 				<tr>
 					<td width="120px">첨부파일</td>
-					<td width="580px"><input id="b_file" name="b_file"
+					<td width="580px"><input id="bs_file" name="bs_file"
 						class="easyui-filebox" style="width: 100%"></td>
 				</tr>
 				<tr>
@@ -210,8 +209,8 @@ out.print(getBoardList);
 form전송시 encType옵션이 추가되면 request객체로 사용자가 입력한 값을 꺼낼 수 없다.
 MultipartRequest  => cos.jar
  -->
-		<!--<form id="f_boardAdd" method="post" enctype="multipart/form-data">  -->
-		<form id="f_boardAdd" method="get">
+		<form id="f_boardAdd" method="post" enctype="multipart/form-data"> 
+		<--<form id="f_boardAdd" method="get">-->
 			<input type="hidden" name="bm_no" value="<%=bm_no%>"> <input
 				type="hidden" name="bm_group" value="<%=bm_group%>"> <input
 				type="hidden" name="bm_pos" value="<%=bm_pos%>"> <input
