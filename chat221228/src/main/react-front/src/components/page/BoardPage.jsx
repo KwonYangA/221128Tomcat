@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Bottom from '../include/Bottom'
-import Header from '../include/Header'
+import Bottom from '../include/Bottom';
+import Header from '../include/Header';
 
-const EmpPage = ({authLogic}) => {
+const BoardPage = ({ authLogic }) => {
+ 
   const navigate = useNavigate();
   const onLogout = () => {
     console.log('onLogout');
@@ -16,13 +17,12 @@ const EmpPage = ({authLogic}) => {
       }
     });
   });
-
   return (
     <>
-      <Header onLogout={onLogout}/>
-      사원관리시스템
+      <Header onLogout={onLogout} />
+      BoardPage
       <Bottom />
     </>
-  )
-}
-export default EmpPage;
+  );
+};
+export default BoardPage;

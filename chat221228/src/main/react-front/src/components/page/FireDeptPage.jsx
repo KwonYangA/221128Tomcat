@@ -64,4 +64,4 @@ const FireDeptPage = () => {
     </>
   )
 }
-export default FireDeptPage
+export default FireDeptPage;
