@@ -18,7 +18,9 @@ public class ModelAndView {
 	//캡슐화 코드는 반드시 getter/setter가 필요 -> Lombok(스프링에서는)
 	private String viewName = null;
 	List<Map<String, Object>> reqList = new ArrayList<>();
-	public ModelAndView() {}
+	public ModelAndView() {
+		
+	}
 	public ModelAndView(HttpServletRequest req) {
 		this.req = req;
 	}

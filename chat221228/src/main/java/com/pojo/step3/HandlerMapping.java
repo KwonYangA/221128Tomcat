@@ -22,7 +22,21 @@ public class HandlerMapping {
 		String path = null;
 		Object obj = null;
 		ModelAndView mav = null;
-		if ("board3".equals(upmu[0])) {
+		if("common".equals(upmu[0])) {
+			controller = new CommonController();	
+			if ("zipcodeList".equals(upmu[1])) {// html화면 출력이 나감- text/html
+				obj = controller.zipcodeList(req, res);
+				// 리턴타입이 ModelAndView
+				if (obj instanceof ModelAndView) {
+					return (ModelAndView) obj;
+				}
+				// 리턴타입이 ModelAndView
+				else if (obj instanceof String) {
+					return (String) obj;
+				}
+			}////end of zipcodeList
+		}
+		else if ("board3".equals(upmu[0])) {
 			controller = new Board3Controller();
 			// 게시글 전체 목록
 			if ("boardList".equals(upmu[1])) {// html화면 출력이 나감- text/html
@@ -72,6 +86,37 @@ public class HandlerMapping {
 				if (obj instanceof String) {
 					return (String) obj;
 				}
+			}
+			else if("imageUpload".equals(upmu[1])) {//리액트 quill editor 이미지 추가
+				obj = controller.imageUpload(req, res);
+				logger.info("imageUpload호출==> boolean : "+obj instanceof String);
+				//리턴타입이 String
+				if(obj instanceof String) {
+					return (String)obj;					
+				}					
+			}
+			else if("imageDownload".equals(upmu[1])) {//리액트 quill editor 이미지 추가
+				obj = controller.imageDownload(req, res);
+				logger.info("imageDownload호출==> boolean : "+obj instanceof String);
+				//리턴타입이 String
+				if(obj instanceof String) {
+					return (String)obj;					
+				}
+			}
+			else if("imageGet".equals(upmu[1])) {//리액트 quill editor 이미지 추가
+				obj = controller.imageGet(req, res);
+				logger.info("imageGet호출==> boolean : "+obj instanceof String);
+				//리턴타입이 String
+				if(obj instanceof String) {
+					return (String)obj;					
+				}					
+			}
+			else if("boardUpdate".equals(upmu[1])) {//글수정 - 첨부파일 수정 유무 고려하기
+				obj = controller.boardUpdate(req, res);
+				//리턴타입이 String
+				if(obj instanceof String) {
+					return (String)obj;					
+				}							
 			}
 		} // end of 게시판 구현
 			// 회원관리나 인증관리 등등 다른 기능 구현
