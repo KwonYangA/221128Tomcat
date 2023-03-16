@@ -119,12 +119,24 @@ public class HandlerMapping {
 				}							
 			}
 		} // end of 게시판 구현
-			// 회원관리나 인증관리 등등 다른 기능 구현
+		// 회원관리나 인증관리 등등 다른 기능 구현
 		else if ("auth".equals(upmu[0])) {
 
-		} else if ("member".equals(upmu[0])) {
-
-		} // 주문관리
+		}
+		//회원 관리 - 
+		else if ("member".equals(upmu[0])) {
+			controller = new MemberController();
+			if ("login".equals(upmu[1])) {
+			obj = controller.login(req, res);
+				if (obj instanceof String) {
+				return (String) obj;
+				}
+				else if(obj instanceof ModelAndView) {
+				return (ModelAndView) obj;
+				}
+			}
+		} 
+		// 주문관리
 		else if ("order".equals(upmu[0])) {
 
 		}

@@ -282,4 +282,10 @@ public class Board3Controller implements Controller3 {
 	public Object zipcodeList(HttpServletRequest req, HttpServletResponse res) {
 		return null;
 	}
+
+	@Override
+	public Object login(HttpServletRequest req, HttpServletResponse res) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

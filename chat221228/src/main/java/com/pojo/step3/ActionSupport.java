@@ -33,13 +33,19 @@ public class ActionSupport extends HttpServlet {
 
 		Object obj = "";
 		try {
+//--------------여기를 진행하는 것은 내려가는 길(서버부분)
 			obj = HandlerMapping.getController(upmu, req, res);
 		} catch (Exception e) {
 			logger.info("Exception :" + e.toString());
 		}
-		if (obj != null) { // 응답시
-			String pageMove[] = null;// redirect:XXX.jsp or forward:XXX.jsp
+		
+//--------------여기는 응답으로 나가는 길(view부분)
+		// ModelAndView(->WEB-INF-VIEW-) 이거나 String(->webapp)
+		if (obj != null) { 
+			//pageMove 기억 - 응답페이지의 위치를 결정()
+			String pageMove[] = null;
 			ModelAndView mav = null;
+/////////////////----------------String
 			if(obj instanceof String) {
 				logger.info("obj가 String일때");
 				if(((String) obj).contains(":")) {
@@ -55,28 +61,29 @@ public class ActionSupport extends HttpServlet {
 					pageMove[0] = obj.toString();
 					logger.info(obj.toString());
 				}
+////////////////////------------ModelAndView	
 			}else if(obj instanceof ModelAndView) {
 				logger.info("obj가 ModelAndView일때");
 				mav = (ModelAndView)obj;
 				pageMove = new String[2];
 				pageMove[0] = "";//forward-> ViewResolver else if()타게됨-> webapp
 				pageMove[1] = mav.getViewName();
-				
+				logger.info(pageMove[0]+","+pageMove[1]);			
 			}
-			logger.info("Object가 String일때와 ModelAndView일때 가 끝난지점...");
+				logger.info("Object가 String일때와 ModelAndView일때 가 끝난지점...");
 			if(pageMove !=null && pageMove.length==2) {
-				//pageMove[0] = redirect or forward
-				//pageMove[1] = XXX.jsp
-				new ViewResolver(req,res,pageMove);
+			 //pageMove[0] = redirect or forward
+			 //pageMove[1] = XXX.jsp
+			 new ViewResolver(req,res,pageMove);
 			}
+			//pageMove배열이 한개인 경우는 리턴값이 String인 경우일 때-@RestController, RespnoseBody
 			else if(pageMove !=null && pageMove.length==1) {
-				res.setContentType("text/plain;charset=UTF-8");
-				PrintWriter out = res.getWriter();
-				out.print(pageMove[0]);
+			 res.setContentType("text/plain;charset=UTF-8");
+			 PrintWriter out = res.getWriter();
+			 out.print(pageMove[0]);
 			}
 		}
-		}
-	
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
