@@ -43,8 +43,8 @@
     	text-decoration: none;
     }
     </style>
+<!-- //////////////////////[[로그인 함수]]///////////////////////  -->
     <script type="text/javascript">
-<!-- //////////로그인 함수/////////  -->
     const login = () =>{
     	/* SELECT mem_name FROM BOOK_MEMBER
         WHERE  mem_id =: id
@@ -56,14 +56,28 @@
            	console.log(user_id + user_pw);
 			window.location.href="./login.st3?mem_id="+user_id+"&mem_pw="+user_pw;
     }
+    <!-- /////////////////[[로그아웃 함수]]/////////////////////  -->
+    const logout = () =>{
+        const user_id = $("#_easyui_textbox_input1").val();
+     	 const user_pw = $("#_easyui_textbox_input2").val();
+     	console.log(user_id + user_pw);
+		window.location.href="./logout.st3";
+    }
     </script>
+<!-- /////////////////[[로그인 화면]]///////////////////////// -->
 </head>
 <body>
     <h2>웹 어플리케이션 실습</h2>
     <div style="margin:20px 0;"></div>
     <div class="easyui-layout" style="width:1000px; height:550px;">
-<!-- 메뉴 구성[로그인화면과 트리메뉴] -->
+<!-- /////////////메뉴 구성[로그인화면과 트리메뉴]////////////// -->
         <div id="p" data-options="region:'west'" title="West" style="width:200px; padding:10px">
+<%
+	if(cmem_id == null){
+		
+	
+%>
+
 <!-- /////////////////[[로그인 화면]]///////////////////////// -->
 		<div id="d_login" align="center">
 		<input id="tb_id" type="text" style="width:170px">
@@ -97,9 +111,33 @@
 		});
 		</script>
 		</div>
-	
+<!-- ///////////////////[[로그인 화면]]///////////////////////// -->
+<%
+	}
+	else{ //로그인을 한 상태
+%>	
 <!-- /////////////////[[로그아웃 화면]]///////////////////////// -->
-        <div id="d_logout" align="center"></div>
+        <div id="d_logout" align="center">
+        	<span><%=cmem_name%>님 환영합니다.</span>
+        	<br />
+		<div style="margin: 3px 0;"></div><!--외부여백을 위, 아래 3px-->
+			<a id="btn_logout" href ="javascript:logout()">로그아웃</a>
+		<script>
+			$('#btn_logout').linkbutton({
+			    iconCls: 'icon-remove'
+			});
+		</script>
+			<a id="btn_member" href ="javascript:memberShip()">정보수정</a>
+		<script>
+			$('#btn_member').linkbutton({
+			    iconCls: 'icon-edit'
+			});
+		</script>
+        </div>
+<!-- /////////////////[[로그아웃 화면]]///////////////////////// -->
+<%
+	}
+%>
 <!-- 메뉴 구성[로그인화면과 트리메뉴] -->
 		<div style="margin: 3px 0;"></div>
 		<ul id="tre_gym" class="easyui-tree">

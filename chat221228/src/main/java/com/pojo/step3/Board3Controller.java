@@ -288,4 +288,10 @@ public class Board3Controller implements Controller3 {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Object logout(HttpServletRequest req, HttpServletResponse res) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

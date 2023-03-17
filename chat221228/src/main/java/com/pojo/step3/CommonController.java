@@ -86,5 +86,11 @@ public class CommonController implements Controller3 {
 		return null;
 	}
 
+	@Override
+	public Object logout(HttpServletRequest req, HttpServletResponse res) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -16,6 +16,7 @@ import com.util.HashMapBinder;
 public class MemberController implements Controller3 {
 	Logger logger = Logger.getLogger(MemberController.class);
 	MemberLogic memberLogic = new MemberLogic();
+	
 	@Override
 	public Object login(HttpServletRequest req, HttpServletResponse res) {
 		logger.info("login메소드 호출");
@@ -34,6 +35,25 @@ public class MemberController implements Controller3 {
         Cookie cmem_name = new Cookie( "cmem_name", rMap.get( "MEM_NAME" ).toString() );
         cmem_name.setPath( "/" );
         cmem_name.setMaxAge( 60 * 60 );
+        res.addCookie( cmem_name );
+        
+		return "redirect:./cindex.jsp";
+	}
+	
+	@Override
+	public Object logout(HttpServletRequest req, HttpServletResponse res) {
+		logger.info("logout메소드 호출");
+		//쿠니는 삭제 코드가 따로X
+		//생성자에 두번째 파라미터에 빈문자열로 처리, 시간을 0으로 초기화
+		//도메인도 동일하게 맞춰야 삭제가 됨(주의!!!!)
+		Cookie cmem_id = new Cookie( "cmem_id","");
+        cmem_id.setPath( "/" );
+        cmem_id.setMaxAge( 0 );
+        res.addCookie( cmem_id );
+        
+        Cookie cmem_name = new Cookie( "cmem_name","");
+        cmem_id.setPath( "/" );
+        cmem_id.setMaxAge( 0 );
         res.addCookie( cmem_name );
         
 		return "redirect:./cindex.jsp";

@@ -128,12 +128,21 @@ public class HandlerMapping {
 			controller = new MemberController();
 			if ("login".equals(upmu[1])) {
 			obj = controller.login(req, res);
-				if (obj instanceof String) {
+			  if (obj instanceof String) {
 				return (String) obj;
-				}
-				else if(obj instanceof ModelAndView) {
+			  }
+			  else if(obj instanceof ModelAndView) {
 				return (ModelAndView) obj;
-				}
+			  }
+			}
+			else if ("logout".equals(upmu[1])) {
+			obj = controller.logout(req, res);
+			  if (obj instanceof String) {
+				return (String) obj;
+			  }
+			  else if(obj instanceof ModelAndView) {
+				return (ModelAndView) obj;
+			  }
 			}
 		} 
 		// 주문관리
